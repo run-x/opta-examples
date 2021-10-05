@@ -1,0 +1,10 @@
+name: aws_environment
+org_name: my_org_name
+providers:
+  aws:
+    region: us-east-1
+    account_id: 652824372180
+modules:
+  - type: base
+  - type: k8s-cluster
+  - type: k8s-base

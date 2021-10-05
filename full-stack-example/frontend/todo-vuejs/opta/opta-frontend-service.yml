@@ -1,0 +1,13 @@
+name: todofrontend
+environments:
+  - name: aws_environment
+    path: "../../awsenv.yaml"
+modules:
+  - name: todofrontend
+    type: k8s-service
+    port:
+      http: 80
+    image: AUTO
+    healthcheck_path: "/"
+    public_uri: "/frontend"
+
