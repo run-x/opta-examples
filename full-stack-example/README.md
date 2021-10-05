@@ -6,11 +6,20 @@ This full stack example implements a todo list. This folder contains the followi
 * Infrastructure-as-code via Opta yaml files and Dockerfiles to deploy the application into a provider
 * Opta-based helm installation of the Prometheus/Grafana observability stack  
 
+Here are some screenshots of what will be deployed:
+![alt text](frontend.png "Todo Application Frontend")
+![alt text](api.png "Todo Application API Backend")
+![alt text](grafana.png "Observability with Grafana+Prometheus")
+
+Lets get started!
+
 # Running the Example
 
 You can build and run the example like so (all paths are relative to this git repository's root directory):
 
-### Build the code docker images:
+## Build the code docker images:
+
+First, as a developer you can develop the code for the backend and the frontend and create the docker images for your code.
 
 ```bash
 # Django API
@@ -46,15 +55,86 @@ opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --a
 
 ```
 
-
-
 After the deployments are complete you can open your web-browser to see the Todo application [frontend](localhost:8080/frontend) and [API backend](http://localhost:8080/djangoapi/apis/v1/). Try adding some items to your todo list frontend and observe the data being stored in the backend API view.
 
 You can also open the [Grafana server gui](http://localhost:8080/grafana) and login using the credentials `admin`/`prom-operator`. After you enable some Kubernetes dashboards, you may need to wait a few minutes for the data to show up.
 
-## Deploy to AWS, GCP or Azure
+As a developer, you can repeatedly iterate over the application code, create and tag new docker image versions, and re-deploy the services on your local Kubernetes cluster for testing and development.
 
-Coming soon!
+### Uninstall Services from Local Environment
+
+```bash
+# Services
+opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
+opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
+
+```
+## Deploy to Amazon Web Services
+
+### Create Environment
+
+__Note: While Opta gives you SOC-2 compliant infrastructure, this example is not production ready in terms of application security, please destroy the environment after trying it out.__
+
+Copy the environ file to `/tmp`
+
+```bash
+
+cp full-stack-example/envs/ /tmp
+```
+
+Setup the AWS environment like so:
+
+```bash
+# Environment (EKS cluster, VPCs etc.)
+opta apply --config /tmp/aws.env --auto-approve
+```
+
+### Create/Update Application Code
+
+```bash
+
+# API
+opta deploy --image todo-api:v1 --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
+```
+
+In order for the frontend to connect to the API backend, we need to tell the SPA about the API location on the machine where the browser runs the SPA. Set the correct value in `full-stack-example/frontend/todo-vuejs/.env` before building the docker image for the frontend.
+
+Then deploy the frontend into EKS:
+# Frontend
+opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
+
+```
+
+
+
+ 
+
+Optionally, deploy the Prometheus-Grafana observability stack to monitor the infrastructure, like so
+
+```bash
+#Monitoring
+#We copy the values file to /tmp because we need an absolute path for the helm chart
+cp full-stack-example/monitoring/prometheus-grafana-monitoring-stack-values.yaml /tmp
+opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve
+```
+
+As a developer or production operations engineer, you can repeatedly iterate over the application code, create and tag new docker image versions, and re-deploy the services on AWS.
+### Destroy
+
+```bash
+
+# Services
+opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
+opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
+# Environment
+opta destroy --config /tmp/aws.env --auto-approve
+
+```
+
+
+# Further Reading
+
+Visit [Opta Documentation](https://docs.opta.dev/)  to learn more.
 
 # Credits
 

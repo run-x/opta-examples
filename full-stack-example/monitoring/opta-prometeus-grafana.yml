@@ -1,7 +1,7 @@
 name: todomonitoring
 environments:
   - name: aws_environment
-    path: "../../awsenv.yaml"
+    path: "/tmp/aws.yml"
 modules:
   - name: monitoring
     type: helm-chart

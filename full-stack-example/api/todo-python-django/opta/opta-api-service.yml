@@ -1,7 +1,8 @@
 name: todoapi
 environments:
-  - name: aws_environment
-    path: "../../awsenv.yaml"
+  - name: awsenv
+    path: "/tmp/aws.yml"
+
 modules:
   - name: todoapi
     type: k8s-service
