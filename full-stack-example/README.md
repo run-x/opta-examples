@@ -101,6 +101,7 @@ In order for the frontend to connect to the API backend, we need to tell the SPA
 
 Then deploy the frontend into EKS:
 # Frontend
+```
 opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
 
 ```
