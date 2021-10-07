@@ -10,4 +10,4 @@ modules:
     chart_version: '19.0.2'
     namespace: monitoring
     create_namespace: True
-    values_file: "/tmp/prometheus-grafana-monitoring-stack-values.yaml"
+    values_file: "prometheus-grafana-monitoring-stack-values.yaml"

@@ -43,14 +43,10 @@ opta deploy --image todo-api:v1 --config full-stack-example/api/todo-python-djan
 opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve --local
 
 ```
-
 Optionally, deploy the Prometheus-Grafana observability stack to monitor the infrastructure, like so
 
 ```bash
 #Monitoring
-
-#We copy the values file to /tmp because we need an absolute path for the helm chart
-cp full-stack-example/monitoring/prometheus-grafana-monitoring-stack-values.yaml /tmp
 opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve --local
 
 ```
@@ -64,22 +60,26 @@ As a developer, you can repeatedly iterate over the application code, create and
 ### Uninstall Services from Local Environment
 
 ```bash
-# Services
-opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
-opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
+# Destroy Services
+opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve --local
+opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve --local
+
+# Destroy Monitoring
+opta destroy --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve --local
 
 ```
+
 ## Deploy to Amazon Web Services
 
 ### Create Environment
 
 __Note: While Opta gives you SOC-2 compliant infrastructure, this example is not production ready in terms of application security, please destroy the environment after trying it out.__
 
-Copy the environ file to `/tmp`
+Copy the environ file to `/tmp` (Or you can adjust the service opta yaml files to point to the correct environment file path).
 
 ```bash
 
-cp full-stack-example/envs/ /tmp
+cp full-stack-example/envs/aws.env /tmp
 ```
 
 Setup the AWS environment like so:
@@ -97,7 +97,7 @@ opta apply --config /tmp/aws.env --auto-approve
 opta deploy --image todo-api:v1 --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
 ```
 
-In order for the frontend to connect to the API backend, we need to tell the SPA about the API location on the machine where the browser runs the SPA. Set the correct value in `full-stack-example/frontend/todo-vuejs/.env` before building the docker image for the frontend.
+In order for the frontend to connect to the API backend, we need to tell the SPA about the API location on the machine where the browser runs the SPA. Set the correct value of `VUE_APP_DJANGO_ENDPOINT` in `full-stack-example/frontend/todo-vuejs/.env` before building the docker image for the frontend. If you are not using DNS/TLS certificates this would be something like `http://axxxxxxx-yyyyyyyyyy.elb.us-east-1.amazonaws.com`. If you have TLS and DNS configured then use that base URL instead.
 
 Then deploy the frontend into EKS:
 # Frontend
@@ -112,8 +112,8 @@ opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-v
 Optionally, deploy the Prometheus-Grafana observability stack to monitor the infrastructure, like so
 
 ```bash
-#Monitoring
-#We copy the values file to /tmp because we need an absolute path for the helm chart
+# Monitoring
+# We copy the values file to /tmp because we need an absolute path for the helm chart
 cp full-stack-example/monitoring/prometheus-grafana-monitoring-stack-values.yaml /tmp
 opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve
 ```
@@ -126,6 +126,9 @@ As a developer or production operations engineer, you can repeatedly iterate ove
 # Services
 opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
 opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
+
+# Monitoring
+
 # Environment
 opta destroy --config /tmp/aws.env --auto-approve
 

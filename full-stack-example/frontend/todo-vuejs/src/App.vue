@@ -85,7 +85,7 @@
 <script>
 import axios from "axios";
 const api_server_endpoint = process.env.VUE_APP_DJANGO_ENDPOINT;
-var URL = `http://${api_server_endpoint}/djangoapi/apis/v1/`;
+var URL = `${api_server_endpoint}/djangoapi/apis/v1/`;
 export default {
 	name: "App",
 	data() {
