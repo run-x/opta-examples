@@ -75,24 +75,16 @@ opta destroy --config full-stack-example/monitoring/opta-prometeus-grafana.yml -
 
 __Note: While Opta gives you SOC-2 compliant infrastructure, this example is not production ready in terms of application security, please destroy the environment after trying it out.__
 
-Copy the environ file to `/tmp` (Or you can adjust the service opta yaml files to point to the correct environment file path).
-
-```bash
-
-cp full-stack-example/envs/aws.env /tmp
-```
-
 Setup the AWS environment like so:
 
 ```bash
 # Environment (EKS cluster, VPCs etc.)
-opta apply --config /tmp/aws.env --auto-approve
+opta apply --config full-stack-example/providers/aws.yml --auto-approve
 ```
 
 ### Create/Update Application Code
 
 ```bash
-
 # API
 opta deploy --image todo-api:v1 --config full-stack-example/api/todo-python-django/opta/opta-api-service.yml --auto-approve
 ```
@@ -100,22 +92,20 @@ opta deploy --image todo-api:v1 --config full-stack-example/api/todo-python-djan
 In order for the frontend to connect to the API backend, we need to tell the SPA about the API location on the machine where the browser runs the SPA. Set the correct value of `VUE_APP_DJANGO_ENDPOINT` in `full-stack-example/frontend/todo-vuejs/.env` before building the docker image for the frontend. If you are not using DNS/TLS certificates this would be something like `http://axxxxxxx-yyyyyyyyyy.elb.us-east-1.amazonaws.com`. If you have TLS and DNS configured then use that base URL instead.
 
 Then deploy the frontend into EKS:
+
+
+```bash
 # Frontend
-```
+
 opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
 
 ```
-
-
-
- 
-
 Optionally, deploy the Prometheus-Grafana observability stack to monitor the infrastructure, like so
 
 ```bash
 # Monitoring
-# We copy the values file to /tmp because we need an absolute path for the helm chart
-cp full-stack-example/monitoring/prometheus-grafana-monitoring-stack-values.yaml /tmp
+
+cp full-stack-example/monitoring/
 opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve
 ```
 
@@ -129,9 +119,10 @@ opta destroy --config full-stack-example/api/todo-python-django/opta/opta-api-se
 opta destroy --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
 
 # Monitoring
+opta destroy --config full-stack-example/monitoring/opta/opta-prometeus-grafana.yml --auto-approve
 
-# Environment
-opta destroy --config /tmp/aws.env --auto-approve
+# Environment (You can't destroy the environment until the services have been uninstalled using the above 3 commands)
+opta destroy --config full-stack-example/providers/aws.yml --auto-approve
 
 ```
 

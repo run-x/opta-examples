@@ -32,7 +32,7 @@
 						class="new-todo"
 						autofocus
 						autocomplete="off"
-						placeholder="What needs to be done?"
+						placeholder="Lets get going, shall we?"
 						v-model="title"
 						@keyup.enter="postTodo"
 					/>
