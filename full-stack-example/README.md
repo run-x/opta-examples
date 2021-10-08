@@ -23,7 +23,6 @@ First, as a developer you can develop the code for the backend and the frontend 
 
 ```bash
 # Django API
-
 docker build full-stack-example/api/todo-python-django/ --tag todo-api:v1
 
 # Single page application Vuejs Frontend
@@ -96,7 +95,6 @@ Then deploy the frontend into EKS:
 
 ```bash
 # Frontend
-
 opta deploy --image todo-frontend:v1 --config full-stack-example/frontend/todo-vuejs/opta/opta-frontend-service.yml --auto-approve 
 
 ```
@@ -104,8 +102,6 @@ Optionally, deploy the Prometheus-Grafana observability stack to monitor the inf
 
 ```bash
 # Monitoring
-
-cp full-stack-example/monitoring/
 opta apply --config full-stack-example/monitoring/opta-prometeus-grafana.yml --auto-approve
 ```
 
