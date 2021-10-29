@@ -4,12 +4,34 @@ from os import environ
 from sys import exit
 from traceback import format_exc
 from flask import request, render_template, jsonify
-MONGO_URI = environ.get('MONGO_URI',"")
-if not MONGO_URI:
-    print("MONGO_URI is not defined. Was the environment variable set?")
-    exit(1)
+
+def make_conn_string():
+
+    MONGO_URI = environ.get('MONGO_URI',"")
+    MONGO_PASSWORD = environ.get('DB_PASSWORD', "")
+    MONGO_USER = environ.get('DB_USER', "")
+    DATABASE_NAME = environ.get('DATABASE_NAME',"")
+
+    if "" in set([MONGO_URI,MONGO_PASSWORD,MONGO_USER]):
+        print("Are the 3 environment variables set? MONGO_URI, MONGO_PASSWORD, MONGO_USER")
+        exit(1)
+    parts = MONGO_URI.split("//")
+    if DATABASE_NAME:
+        rtnStr = "//".join([
+            parts[0],
+            MONGO_USER + ":" + MONGO_PASSWORD + "@" + parts[1] + "/" + DATABASE_NAME + "?retryWrites=true&w=majority"
+        ])
+    else:
+        rtnStr = "//".join([
+            parts[0],
+            MONGO_USER + ":" + MONGO_PASSWORD + "@" + parts[1]
+        ])
+
+    return rtnStr
+
+MONGO_CONN_STRING = make_conn_string()
 app = Flask(__name__, static_url_path='')
-app.config["MONGO_URI"] = MONGO_URI
+app.config["MONGO_URI"] = MONGO_CONN_STRING
 mongo = PyMongo(app) 
     
 @app.route("/")
