@@ -4,7 +4,7 @@ This example implements a movie search application with Atlas Search and deploys
 
   1. Opta handles the creation of the Atlas database, passing its credentials into the application code
 
-  2. Instead of Atlas Realm, this example uses a simple Flask API backend and deploys it on to a Kubernetes cluster; don't worry - you won't have to spin up the Kubernetes cluster yourself, Opta will do it for you in the cloud of your choice or even your local machine!
+  2. Instead of Atlas Realm, this example uses a Flask API backend and deploys it on to a Kubernetes cluster; don't worry - you won't have to spin up the Kubernetes cluster yourself, Opta will do it for you in the cloud of your choice or even on your local machine!
    
 Atlas is currently supported in Local and AWS Opta environments. Feel free to open a Github issue if you would like to see support in GCP or Azure.
 
@@ -39,6 +39,7 @@ First, lets crate the docker image that contains our application code:
 # in the opta-examples directory cloned from Github (https://github.com/run-x/opta-examples.git)
 docker build -t mongoapp:latest ./opta-atlas-mongo-search
 ```
+Next up, we use Opta to deploy the application's docker image into the Kubernetes cluster that Opta created already:
 
 ```bash
 # For aws
