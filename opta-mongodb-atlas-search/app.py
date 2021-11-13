@@ -7,32 +7,32 @@ from flask import request, render_template, jsonify
 
 def make_conn_string():
 
-    MONGO_URI = environ.get('MONGO_URI',"")
-    MONGO_PASSWORD = environ.get('DB_PASSWORD', "")
-    MONGO_USER = environ.get('DB_USER', "")
+    MONGODB_URI = environ.get('MONGODB_URI',"")
+    MONGODB_PASSWORD = environ.get('DB_PASSWORD', "")
+    MONGODB_USER = environ.get('DB_USER', "")
     DATABASE_NAME = environ.get('DATABASE_NAME',"")
 
-    if "" in set([MONGO_URI,MONGO_PASSWORD,MONGO_USER]):
+    if "" in set([MONGODB_URI,MONGODB_PASSWORD,MONGODB_USER]):
         print("Are the 3 environment variables set? MONGO_URI, MONGO_PASSWORD, MONGO_USER")
         exit(1)
-    parts = MONGO_URI.split("//")
+    parts = MONGODB_URI.split("//")
     if DATABASE_NAME:
         rtnStr = "//".join([
             parts[0],
-            MONGO_USER + ":" + MONGO_PASSWORD + "@" + parts[1] + "/" + DATABASE_NAME + "?retryWrites=true&w=majority"
+            MONGODB_USER + ":" + MONGODB_PASSWORD + "@" + parts[1] + "/" + DATABASE_NAME + "?retryWrites=true&w=majority"
         ])
     else:
         rtnStr = "//".join([
             parts[0],
-            MONGO_USER + ":" + MONGO_PASSWORD + "@" + parts[1]
+            MONGODB_USER + ":" + MONGODB_PASSWORD + "@" + parts[1]
         ])
 
     return rtnStr
 
-MONGO_CONN_STRING = make_conn_string()
+MONGODB_CONN_STRING = make_conn_string()
 app = Flask(__name__, static_url_path='')
-app.config["MONGO_URI"] = MONGO_CONN_STRING
-mongo = PyMongo(app) 
+app.config["MONGO_URI"] = MONGODB_CONN_STRING
+mongodb = PyMongo(app) 
     
 @app.route("/")
 def send_html():
@@ -67,7 +67,7 @@ def search():
         "$limit": 10
     }
     ]
-    results = mongo.db.movies.aggregate(pipeline)
+    results = mongodb.db.movies.aggregate(pipeline)
     
     resp = jsonify(list(results))
     return resp
