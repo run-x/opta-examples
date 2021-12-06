@@ -29,6 +29,7 @@ name_servers = tolist([
 ])
 ```
 * Go to your domain registrar (link namecheap, godaddy, etc.) to point the domain to these nameservers.
+* Update `delegated` field to `true` in the `sourcegraph.yaml` file
 * Run `opta apply -c sourcegraph.yaml` again to generate the TLS certificate
 
 Your domain should now be pointing to the sourcegraph deployment with secure TLS
