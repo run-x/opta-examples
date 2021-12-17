@@ -11,7 +11,7 @@ modules:
     spot_instances: true
   - type: k8s-base
   - type: dns
-    domain: <<domain::string::The dns domain for your Retool deployment>>
+    domain: <<domain::string::The dns domain for your Sourcegraph deployment>>
     delegated: false  # set this to true after setting dns records
   - name: sourcegraph
     type: k8s-service
