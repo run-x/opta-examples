@@ -1,4 +1,4 @@
-name: retool
+name: airflow
 org_name: <<org_name::org_name::Your Organization Name>>
 providers:
   aws:
