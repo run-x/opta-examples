@@ -14,4 +14,4 @@ This directory contains:
 
 This application is available as a Docker image:
 
-- `TODO`
+- `ghcr.io/run-x/opta-examples/hello-app:main`
