@@ -4,11 +4,8 @@ name: Create and publish hello-app
 
 on:
   push:
-    # only on push to main?
-    # branches: [main]
-  pull_request:
-    #TODO do not push for PR
     branches: [main]
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/hello-app
