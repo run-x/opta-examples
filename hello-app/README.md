@@ -15,3 +15,18 @@ This directory contains:
 This application is available as a Docker image:
 
 - `ghcr.io/run-x/opta-examples/hello-app:main`
+
+## Build and run locally
+
+```
+# build the image
+docker build . -t hello-app
+
+# run the hello app
+docker run -p 80:80 hello-app
+
+# run using a different port
+docker run -p 8080:8080 -e PORT=8080 hello-app
+
+```
+
