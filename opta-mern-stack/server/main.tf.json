@@ -1,0 +1,92 @@
+{
+  "provider": {
+    "local": {}
+  },
+  "terraform": {
+    "required_providers": {},
+    "backend": {
+      "local": {
+        "path": "/home/sachin/.opta/local/tfstate/mernbackend"
+      }
+    }
+  },
+  "data": {
+    "terraform_remote_state": {
+      "parent": {
+        "backend": "local",
+        "config": {
+          "path": "/home/sachin/.opta/local/tfstate/localopta"
+        }
+      }
+    }
+  },
+  "module": {
+    "mernbackend": {
+      "source": "../../../../../.opta/modules/local_k8s_service/tf_module",
+      "env_name": "localopta",
+      "layer_name": "mernbackend",
+      "module_name": "mernbackend",
+      "tag": null,
+      "digest": "sha256:4dd13c123168661a0aa0f809ead6b4bbf8d1c380803a22ce3fa6babcfef9f9b4",
+      "link_secrets": [],
+      "links": [],
+      "manual_secrets": [],
+      "image": "AUTO",
+      "ports": [
+        {
+          "name": "main",
+          "type": "http",
+          "port": 8080,
+          "protocol": null,
+          "tls": false,
+          "probeType": "http",
+          "servicePort": 80
+        }
+      ],
+      "probe_port": {
+        "name": "main",
+        "type": "http",
+        "port": 8080,
+        "protocol": null,
+        "tls": false,
+        "probeType": "http",
+        "servicePort": 80
+      },
+      "http_port": {
+        "name": "main",
+        "type": "http",
+        "port": 8080,
+        "protocol": null,
+        "tls": false,
+        "probeType": "http",
+        "servicePort": 80
+      },
+      "min_containers": 1,
+      "max_containers": 3,
+      "autoscaling_target_cpu_percentage": 80,
+      "autoscaling_target_mem_percentage": 80,
+      "secrets": [],
+      "env_vars": [],
+      "healthcheck_path": "/record",
+      "liveness_probe_path": null,
+      "readiness_probe_path": null,
+      "initial_liveness_delay": 30,
+      "initial_readiness_delay": 30,
+      "consistent_hash": null,
+      "sticky_session": false,
+      "sticky_session_max_age": 86400,
+      "resource_request": {
+        "cpu": 100,
+        "memory": 128
+      },
+      "public_uri": [],
+      "persistent_storage": [],
+      "ingress_extra_annotations": {}
+    }
+  },
+  "output": {
+    "docker_repo_url": {
+      "value": "${module.mernbackend.docker_repo_url }"
+    }
+  }
+}

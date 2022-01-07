@@ -1,0 +1,13 @@
+name: mernbackend
+environments:
+  - name: awsenv
+    path: "../awsenv.yaml."
+
+modules:
+  - name: mernbackend
+    type: k8s-service
+    port:
+      http: 8080
+    image: AUTO
+    healthcheck_path: "/record"
+

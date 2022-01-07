@@ -1,0 +1,13 @@
+---
+name: todofrontend
+environments:
+- name: localopta
+  path: /home/sachin/.opta/local/localopta.yaml
+modules:
+- name: mernfrontend
+  type: k8s-service
+  port:
+    http: 3000
+  image: AUTO
+  healthcheck_path: "/"
+  public_uri: "/mernfrontend"
