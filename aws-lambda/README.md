@@ -36,12 +36,12 @@ private_subnet_ids = [
 You can test the deployment using curl like:
 
 ```bash
-curl https://43neawor1c.execute-api.us-east-1.amazonaws.com/
+curl -H "day: day" https://43neawor1c.execute-api.us-east-1.amazonaws.com
 ```
 make sure to replace the uri with the uri generated for you. And you should see an output like:
 
 ```
-{"message": "Sorry, D. E. Fault, None isn't allowed. Have a nice None day!", "input": {"version": "2.0", "routeKey": "ANY /", "rawPath": "/", "rawQueryString": "", "headers": {"accept": "*/*", "content-length": "0", "host": "43neawor1c.execute-api.us-east-1.amazonaws.com", "user-agent": "curl/7.64.1", "x-amzn-trace-id": "Root=1-61d78a72-61e7698946dc444016cf4c9b", "x-forwarded-for": "73.162.24.47", "x-forwarded-port": "443", "x-forwarded-proto": "https"}, "requestContext": {"accountId": "828259620284", "apiId": "43neawor1c", "domainName": "43neawor1c.execute-api.us-east-1.amazonaws.com", "domainPrefix": "43neawor1c", "http": {"method": "GET", "path": "/", "protocol": "HTTP/1.1", "sourceIp": "73.162.24.47", "userAgent": "curl/7.64.1"}, "requestId": "LjKR_jFQoAMESbg=", "routeKey": "ANY /", "stage": "$default", "time": "07/Jan/2022:00:33:54 +0000", "timeEpoch": 1641515634966}, "isBase64Encoded": false}}%
+{"message": "Got your GET, D. E. Fault. Have a nice day!", "input": {"version": "2.0", "routeKey": "ANY /", "rawPath": "/", "rawQueryString": "", "headers": {"accept": "*/*", "content-length": "0", "day": "day", "host": "43neawor1c.execute-api.us-east-1.amazonaws.com", "user-agent": "curl/7.77.0", "x-amzn-trace-id": "Root=1-61d8bc57-705914ce514abef9631be62a", "x-forwarded-for": "73.162.24.47", "x-forwarded-port": "443", "x-forwarded-proto": "https"}, "requestContext": {"accountId": "828259620284", "apiId": "43neawor1c", "domainName": "43neawor1c.execute-api.us-east-1.amazonaws.com", "domainPrefix": "43neawor1c", "http": {"method": "GET", "path": "/", "protocol": "HTTP/1.1", "sourceIp": "73.162.24.47", "userAgent": "curl/7.77.0"}, "requestId": "LmJduiNOIAMEMkA=", "routeKey": "ANY /", "stage": "$default", "time": "07/Jan/2022:22:19:03 +0000", "timeEpoch": 1641593943604}, "isBase64Encoded": false}}%
 ```
 
 You can also visit the `lambda_trigger_uri` in your browser to check your rest api deployed on lambda.

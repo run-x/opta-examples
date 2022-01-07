@@ -1,4 +1,3 @@
-# Copied from: https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lambda/lambda_handler_rest.py
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
@@ -39,7 +38,7 @@ def lambda_handler(event, context):
     logger.info("Request: %s", event)
     response_code = 200
 
-    http_method = event.get('httpMethod')
+    http_method = event['requestContext']['http']['method']
     query_string = event.get('queryStringParameters')
     headers = event.get('headers')
     body = event.get('body')
