@@ -7,7 +7,7 @@ providers:
 modules:
   - type: base
   - type: lambda-function
-    expose_via_domain: true
+    expose_via_domain: true  # this is used to expose the lambda to internet via a generated domain
     filename: my-deployment-package.zip
     runtime: "python3.9"
-    handler: "lambda_function.lambda_handler"
+    handler: "lambda_function.lambda_handler"  # function handler location, file_name.function_name

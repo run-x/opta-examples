@@ -6,15 +6,15 @@ This is an example [opta](https://github.com/run-x/opta) configuration file to d
 It deploys a simple [python lambda function](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lambda/lambda_handler_rest.py) with AWS API Gateway. It also sets up various other resources like VPCs, subnets.
 
 # Steps to deploy
-* Fill in the following required variables in the config file
+1. Fill in the following required variables in the [config](opta.yaml) file
   * org_name
   * account_id
-* Create a zip file for your lambda.
+2. Create a zip file for your lambda.
 ```bash
 zip my-deployment-package.zip lambda_function.py
 ```
-Checkout [AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html) on how to package more complex lambdas
-* Run `opta apply`
+3. Run `opta apply`
+This will create all the required resources in your AWS account and deploy your lambda.
 
 That's it. AWS lambda is deployed. You will see an output like this.
 
@@ -33,4 +33,19 @@ private_subnet_ids = [
 ]
 ```
 
-You can visit the `lambda_trigger_uri` created above to check your microservice deployed on lambda.
+You can test the deployment using curl like:
+
+```bash
+curl https://43neawor1c.execute-api.us-east-1.amazonaws.com/
+```
+make sure to replace the uri with the uri generated for you. And you should see an output like:
+
+```
+{"message": "Sorry, D. E. Fault, None isn't allowed. Have a nice None day!", "input": {"version": "2.0", "routeKey": "ANY /", "rawPath": "/", "rawQueryString": "", "headers": {"accept": "*/*", "content-length": "0", "host": "43neawor1c.execute-api.us-east-1.amazonaws.com", "user-agent": "curl/7.64.1", "x-amzn-trace-id": "Root=1-61d78a72-61e7698946dc444016cf4c9b", "x-forwarded-for": "73.162.24.47", "x-forwarded-port": "443", "x-forwarded-proto": "https"}, "requestContext": {"accountId": "828259620284", "apiId": "43neawor1c", "domainName": "43neawor1c.execute-api.us-east-1.amazonaws.com", "domainPrefix": "43neawor1c", "http": {"method": "GET", "path": "/", "protocol": "HTTP/1.1", "sourceIp": "73.162.24.47", "userAgent": "curl/7.64.1"}, "requestId": "LjKR_jFQoAMESbg=", "routeKey": "ANY /", "stage": "$default", "time": "07/Jan/2022:00:33:54 +0000", "timeEpoch": 1641515634966}, "isBase64Encoded": false}}%
+```
+
+You can also visit the `lambda_trigger_uri` in your browser to check your rest api deployed on lambda.
+
+# References
+* Checkout [AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html) on how to package more complex lambdas
+* [Opta docs](https://docs.opta.dev)
