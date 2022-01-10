@@ -1,0 +1,4 @@
+{
+    "ENV": "development",
+    "API_ENDPOINT": "http://localhost:5010"
+  }

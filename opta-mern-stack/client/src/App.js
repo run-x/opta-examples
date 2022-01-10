@@ -8,8 +8,11 @@ import Navbar from "./components/navbar";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import RecordList from "./components/recordList";
+import Config from "./config.json";
 
 const App = () => {
+  const environment = Config.ENV;
+  const baseUrl = Config.BASE_URL;
   return (
     <div>
       <Navbar />

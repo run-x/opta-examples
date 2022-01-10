@@ -2,6 +2,7 @@ import React,  {Component}  from "react";
 // This will require to npm install axios
 import axios from "axios";
 import { withRouter } from "react-router";
+import Config from "../config.json";
 class Edit extends Component {
   // This is the constructor that stores the data.
   constructor(props) {
@@ -21,7 +22,7 @@ class Edit extends Component {
   }
   // This will get the record based on the id from the database.
   componentDidMount() {
-    const api_endpoint = process.env.API_ENDPOINT;
+    const api_endpoint = Config.API_ENDPOINT;
     axios
       .get(api_endpoint + "/record/" + this.props.match.params.id)
       .then((response) => {
@@ -66,7 +67,7 @@ class Edit extends Component {
     console.log(newEditedperson);
 
     // This will send a post request to update the data in the database.
-    const api_endpoint = process.env.API_ENDPOINT;
+    const api_endpoint = Config.API_ENDPOINT;
     axios
       .post(
         api_endpoint + "/update/" + this.props.match.params.id,

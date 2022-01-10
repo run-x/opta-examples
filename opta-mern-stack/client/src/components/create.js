@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
-
+import Config from "../config.json";
 export default class Create extends Component {
   // This is the constructor that stores the data.
   constructor(props) {
@@ -48,7 +48,7 @@ export default class Create extends Component {
       person_position: this.state.person_position,
       person_level: this.state.person_level,
     };
-    const api_endpoint = process.env.API_ENDPOINT;
+    const api_endpoint =Config.API_ENDPOINT;
     axios
       .post(api_endpoint + "/record/add", newperson)
       .then((res) => console.log(res.data));
