@@ -5,7 +5,7 @@ services:
     ports: 
       - "3000:80"
     environment:
-      - API_ENDPOINT=http://localhost:5080
+      - API_ENDPOINT=http://localhost:5020
   backend:
     build: ./server
     ports:

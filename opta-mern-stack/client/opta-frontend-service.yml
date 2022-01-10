@@ -6,11 +6,11 @@ modules:
   - name: mernfrontend
     type: k8s-service
     port:
-      http: 3000
+      http: 80
     image: AUTO
     env_vars:
       - name: "API_ENDPOINT"
-        value: "http://localhost:5020"
+        value: "http://localhost:5080"
     healthcheck_path: "/"
     public_uri: "/mernfrontend"
 
