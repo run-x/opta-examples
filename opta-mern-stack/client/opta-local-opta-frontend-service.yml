@@ -1,5 +1,5 @@
 ---
-name: todofrontend
+name: mernfrontend
 environments:
 - name: localopta
   path: /home/sachin/.opta/local/localopta.yaml

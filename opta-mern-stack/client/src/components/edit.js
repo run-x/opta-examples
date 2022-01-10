@@ -22,8 +22,9 @@ class Edit extends Component {
   }
   // This will get the record based on the id from the database.
   componentDidMount() {
+    const api_endpoint = process.env.API_ENDPOINT;
     axios
-      .get("http://localhost:5000/record/" + this.props.match.params.id)
+      .get(api_endpoint + "/record/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
           person_name: response.data.person_name,
@@ -66,9 +67,10 @@ class Edit extends Component {
     console.log(newEditedperson);
 
     // This will send a post request to update the data in the database.
+    const api_endpoint = process.env.API_ENDPOINT;
     axios
       .post(
-        "http://localhost:5000/update/" + this.props.match.params.id,
+        api_endpoint + "/update/" + this.props.match.params.id,
         newEditedperson
       )
       .then((res) => console.log(res.data));

@@ -1,4 +1,4 @@
-name: todofrontend
+name: mernfrontend
 environments:
   - name: awsenv
     path: "../awsenv.yaml"

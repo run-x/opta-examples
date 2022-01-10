@@ -4,9 +4,11 @@ services:
     build: ./client
     ports: 
       - "3000:3000"
+    env_file:
+      - ./client/config.env
   backend:
     build: ./server
     ports:
-      - "5000:5000"
+      - "5010:5010"
       
     

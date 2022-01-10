@@ -32,8 +32,9 @@ export default class RecordList extends Component {
 
   // This method will get the data from the database.
   componentDidMount() {
+    const api_endpoint = process.env.API_ENDPOINT;
     axios
-      .get("http://localhost:5000/record/")
+      .get(api_endpoint +"/record/")
       .then((response) => {
         this.setState({ records: response.data });
       })
@@ -44,7 +45,8 @@ export default class RecordList extends Component {
 
   // This method will delete a record based on the method
   deleteRecord(id) {
-    axios.delete("http://localhost:5000/" + id).then((response) => {
+    const api_endpoint = process.env.API_ENDPOINT;
+    axios.delete(api_endpoint + "/" + id).then((response) => {
       console.log(response.data);
     });
 
