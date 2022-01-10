@@ -4,12 +4,12 @@ services:
     build: ./client
     ports: 
       - "3000:80"
-    env_file:
-      - ./client/config.env
+    environment:
+      - API_ENDPOINT=http://localhost:5020
   backend:
     build: ./server
     ports:
-      - "5010:5010"
+      - "5020:5010"
     env_file:
       - ./server/config.env
 
