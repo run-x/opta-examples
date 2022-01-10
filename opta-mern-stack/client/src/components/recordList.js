@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+require('dotenv').config();
 const Record = (props) => (
   <tr>
     <td>{props.record.person_name}</td>

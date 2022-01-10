@@ -16,5 +16,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 5010
-CMD [ "node", "server.js", "--port", "5010" ]
+CMD [ "node", "server.js" ]
 

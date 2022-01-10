@@ -10,5 +10,8 @@ services:
     build: ./server
     ports:
       - "5010:5010"
+    env_file:
+      - ./server/config.env
+
       
     
