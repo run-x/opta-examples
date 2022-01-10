@@ -8,6 +8,9 @@ modules:
     port:
       http: 3000
     image: AUTO
+    env_vars:
+      - name: "API_ENDPOINT"
+        value: "http://localhost:5020"
     healthcheck_path: "/"
     public_uri: "/mernfrontend"
 

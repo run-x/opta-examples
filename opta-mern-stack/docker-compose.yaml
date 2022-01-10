@@ -5,13 +5,15 @@ services:
     ports: 
       - "3000:80"
     environment:
-      - API_ENDPOINT=http://localhost:5020
+      - API_ENDPOINT=http://localhost:5080
   backend:
     build: ./server
     ports:
-      - "5020:5010"
+      - "5080:5020"
     env_file:
       - ./server/config.env
+    environment:
+      - PORT=5020
 
       
     
