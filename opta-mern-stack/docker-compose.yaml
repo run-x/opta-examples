@@ -3,7 +3,7 @@ services:
   frontend:
     build: ./client
     ports: 
-      - "3000:3000"
+      - "3000:80"
     env_file:
       - ./client/config.env
   backend:

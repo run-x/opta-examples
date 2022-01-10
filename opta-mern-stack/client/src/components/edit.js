@@ -2,7 +2,6 @@ import React,  {Component}  from "react";
 // This will require to npm install axios
 import axios from "axios";
 import { withRouter } from "react-router";
-require('dotenv').config();
 class Edit extends Component {
   // This is the constructor that stores the data.
   constructor(props) {
