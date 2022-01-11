@@ -11,6 +11,6 @@ modules:
   image: AUTO
   env_vars:
   - name: "API_ENDPOINT"
-    value: "http://localhost:5080"
+    value: "http://localhost:8080/mernbackend"
   healthcheck_path: "/"
   public_uri: "/mernfrontend"

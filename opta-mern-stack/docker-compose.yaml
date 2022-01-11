@@ -10,10 +10,12 @@ services:
     build: ./server
     ports:
       - "5080:5020"
-    env_file:
-      - ./server/config.env
     environment:
       - PORT=5020
+      - MONGODB_URI=mongodb+srv://cluster0.abcdef.mongodb.net
+      - MONGODB_PASSWORD=whatever
+      - MONGODB_USER=whatever
+  
 
       
     
