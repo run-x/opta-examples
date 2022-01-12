@@ -57,29 +57,30 @@ This directory contains:
 
 1. Select the target environment
     ```bash
-    export ENV=[aws/azure/gcp] #pick one
+    #pick one
+    export ENV=[aws/azure/gcp]
 
-    # for a cloud provider, edit this file to specify where to deploy
+    # edit the env file to specify where to deploy (Account information)
     open env-${ENV}.yaml 
     ```
-1. Create the environment infrastructure (VPC, Kubernetes...)
+2. Create the environment infrastructure (VPC, Kubernetes...)
     ```bash
     opta apply --auto-approve -c env-${ENV}.yaml
-    # when done, find load_balancer_raw_dns or load_balancer_raw_ip in the output
+    # when done, find load_balancer_raw_dns or load_balancer_raw_ip in the output and save it
     export load_balancer=[Value from output]
     ```
-1. Deploy the service: push the image and deploy it to Kubernetes
+3. Deploy the service: push the image and deploy it to Kubernetes
     ```bash
     opta deploy --image hello-app:v1 --config hello.yaml --auto-approve --env $ENV
     ```
-1. Test
+4. Test
     ```bash
     curl http://${load_balancer}/hello
 
     # you can run any kubectl command at this point
     kubectl -n hello get all
     ```
-1. Clean up
+5. Clean up
     ```bash
     opta destroy --auto-approve --config hello.yaml --env $ENV
     opta destroy --auto-approve --config env-${ENV}.yaml
