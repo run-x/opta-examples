@@ -1,7 +1,7 @@
 name: todofrontend
 environments:
   - name: awsenvironment
-    path: "../../../providers/aws.yml"
+    path: "../../../providers/aws.yaml"
 modules:
   - name: todofrontend
     type: k8s-service

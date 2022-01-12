@@ -1,6 +1,6 @@
 # What is this?
 
-This is an example [opta](https://github.com/run-x/opta) configuration file to deploy sourcegraph on AWS.
+This is an example [opta](https://github.com/run-x/opta) configuration file to deploy [Sourcegraph](https://about.sourcegraph.com/) on AWS.
 
 You can also use this button to fill in the variable fields in the config.
 

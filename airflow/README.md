@@ -1,10 +1,10 @@
 # What is this?
 
-This is an example [opta](https://github.com/run-x/opta) configuration file to deploy airflow on AWS.
+This is an example [opta](https://github.com/run-x/opta) configuration file to deploy [Apache Airflow](https://airflow.apache.org/) on AWS.
 
 You can also use this button to fill in the variable fields in the config.
 
-[![Deploy to AWS](https://raw.githubusercontent.com/run-x/opta/main/assets/deploy-to-aws-button.svg)](https://app.runx.dev/deploy-with-aws?url=https%3A%2F%2Fgithub.com%2Frun-x%2Fopta-examples%2Fblob%2Fmain%2Fairflow%2Fairflow_aws.yaml&name=Airflow)
+[![Deploy to AWS](https://raw.githubusercontent.com/run-x/opta/main/assets/deploy-to-aws-button.svg)](https://app.runx.dev/deploy-with-aws?url=https%3A%2F%2Fgithub.com%2Frun-x%2Fopta-examples%2Fblob%2Fmain%2Fairflow%2Fairflow-aws.yaml&name=Airflow)
 
 
 # What does this do?
@@ -12,14 +12,14 @@ It deploys a single container version of airflow on EKS in AWS. It uses AWS mana
 
 # Steps to deploy
 * Fill in the required variables in the config file
-* Run `opta apply -c airflow_aws.yaml` on the config file
+* Run `opta apply -c airflow-aws.yaml` on the config file
 
 That's it. Airflow is deployed on AWS. You can find the AWS load balancer URL to access the deployment by running `opta output`
 
 To get DNS to work follow the next section
 
 # Getting DNS to work
-* Run `opta output -c airflow_aws.yaml` to get the nameservers. You will see a section like this:
+* Run `opta output -c airflow-aws.yaml` to get the nameservers. You will see a section like this:
 ```yaml
 name_servers = tolist([
   “ns-1384.awsdns-45.org”,
@@ -29,8 +29,8 @@ name_servers = tolist([
 ])
 ```
 * Go to your domain registrar (link namecheap, godaddy, etc.) to point the domain to these nameservers.
-* Update `delegated` field to `true` in the `airflow_aws.yaml` file
-* Run `opta apply -c airflow_aws.yaml` again to generate the TLS certificate
+* Update `delegated` field to `true` in the `airflow-aws.yaml` file
+* Run `opta apply -c airflow-aws.yaml` again to generate the TLS certificate
 
 Your domain should now be pointing to the airflow deployment with secure TLS
 
