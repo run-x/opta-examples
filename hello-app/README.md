@@ -57,7 +57,7 @@ This directory contains:
 
 1. Select the target environment
     ```bash
-    #pick one
+    # pick one
     export ENV=[aws/azure/gcp]
 
     # edit the env file to specify where to deploy (Account information)
