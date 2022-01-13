@@ -1,7 +1,7 @@
 name: mernfrontend
 environments:
   - name: awsenv
-    path: "../awsenv.yaml"
+    path: "/home/sachin/alt/runx/insync/optafiles/atlas-demo/awsenv.yaml"
 modules:
   - name: mernfrontend
     type: k8s-service
@@ -10,7 +10,7 @@ modules:
     image: AUTO
     env_vars:
       - name: "API_ENDPOINT"
-        value: "http://localhost:8080/mernbackend"
+        value: "opta-atlassearchenv3-lb-d60e914f75283cca.elb.us-east-1.amazonaws.com/mernbackend"
     healthcheck_path: "/"
     public_uri: "/mernfrontend"
 
