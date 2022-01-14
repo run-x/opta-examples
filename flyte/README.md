@@ -35,3 +35,4 @@ name_servers = tolist([
 
 Your domain should now be pointing to the flyte deployment with secure TLS
 
+# [FAQ](../FAQ.md)

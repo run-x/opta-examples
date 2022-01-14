@@ -34,3 +34,4 @@ name_servers = tolist([
 
 Your domain should now be pointing to the retool deployment with secure TLS
 
+# [FAQ](../FAQ.md)

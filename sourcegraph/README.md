@@ -33,3 +33,5 @@ name_servers = tolist([
 * Run `opta apply -c sourcegraph.yaml` again to generate the TLS certificate
 
 Your domain should now be pointing to the sourcegraph deployment with secure TLS
+
+# [FAQ](../FAQ.md)
