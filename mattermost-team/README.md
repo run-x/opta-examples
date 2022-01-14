@@ -3,6 +3,7 @@
 This is an example [opta](https://github.com/run-x/opta) configuration file to deploy [Mattermost](https://mattermost.com/) (Team Edition) on AWS.
 
 You can also use this button to fill in the variable fields in the config.
+
 [![Deploy](https://raw.githubusercontent.com/run-x/opta/main/assets/deploy-to-aws-button.svg)](https://app.runx.dev/deploy-with-aws?url=https%3A%2F%2Fgithub.com%2Frun-x%2Fopta-examples%2Fblob%2Fmain%2Fmattermost-team%2Fmattermost-aws.yaml&name=)
 
 # What does this do?
