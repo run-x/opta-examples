@@ -10,7 +10,7 @@ modules:
     image: AUTO
     env_vars:
       - name: "API_ENDPOINT"
-        value: "opta-atlassearchenv3-lb-d60e914f75283cca.elb.us-east-1.amazonaws.com/mernbackend"
+        value: "http://opta-atlassearchenv3-lb-d60e914f75283cca.elb.us-east-1.amazonaws.com/mernbackend"
     healthcheck_path: "/"
     public_uri: "/mernfrontend"
 
