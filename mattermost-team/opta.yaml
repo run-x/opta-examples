@@ -1,9 +1,9 @@
 name: mattermost-community
-org_name: <<org_name::org_name::Your Organization Name>>
+org_name: runx
 providers:
   aws:
-    region: <<region::aws_region::Your AWS Region>>
-    account_id: <<account_id::aws_account_id::Your AWS Account ID>>
+    region: us-west-2
+    account_id: 445935066876
 modules:
   - type: base
   - type: k8s-cluster
@@ -11,8 +11,8 @@ modules:
     spot_instances: true
   - type: k8s-base
   - type: dns
-    domain: <<domain::string::The dns domain for your Sourcegraph deployment>>
-    delegated: false  # set this to true after setting dns records
+    domain: mattermost.runx.dev
+    delegated: true  # set this to true after setting dns records
   - name: db
     type: mysql
   - type: helm-chart
