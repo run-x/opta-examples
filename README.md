@@ -1,5 +1,6 @@
 # opta-examples
-Examples of using Opta
+This repository holds a compiled list of advanced, standalone, usages of Opta, most beyond the basic tutorials on the 
+[docs](https://docs.opta.dev/)
 
 - [airflow](/airflow): Deploy Apache Airflow on AWS
 - [aws-lambda](/aws-lambda): Deploy Apache Airflow on AWS
