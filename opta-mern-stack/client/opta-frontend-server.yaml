@@ -1,7 +1,7 @@
 name: mernfrontend
 environments:
   - name: awsenv
-    path: "/home/sachin/alt/runx/insync/optafiles/atlas-demo/awsenv.yaml"
+    path: "../awsenv.yaml"
 modules:
   - name: mernfrontend
     type: k8s-service
