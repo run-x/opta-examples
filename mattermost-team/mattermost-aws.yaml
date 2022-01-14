@@ -37,14 +37,14 @@ modules:
         externalConnectionString: "${{module.db.db_user}}:${{module.db.db_password}}@tcp(${{module.db.db_host}}:3306)/${{module.db.db_name}}?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
       ingress:
         enabled: true
-        hosts: ["{module.dns.domain}"]
+        hosts: [""]
         annotations:
           kubernetes.io/ingress.class: "nginx"
       configJSON:
         ServiceSettings:
-          SiteURL:  "{module.dns.domain}"
+          SiteURL:  "${{module.dns.domain}}"
         TeamSettings:
-          SiteName: "{module.dns.domain}"
+          SiteName: "${{module.dns.domain}}"
       serviceAccount:
         create: true
         name: "mattermost"
