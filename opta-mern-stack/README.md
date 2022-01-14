@@ -1,6 +1,7 @@
+![alt text](MERN.jpb "MERN Stack MongoDB, Express, React, Node.js")
 ## Introduction
 
-MongoDB (Database persistence layer) + Nodejs/express (API) + React (Frontend SPA) is the popular MERN application development stack. In this post we show how you can use Opta to easily stand up this stack on a public cloud (gcp/aws) or Local development Kubernetes cluster. Follow through this post and here is what you will get:
+MERN stack is a web software stack that includes MongoDB, Express.js, React, and Node.js. In this post we show how you can use [Opta](https://docs.opta.dev/) to easily stand up a MERN-based application stack on a public cloud (gcp/aws) or Local development Kubernetes cluster. Specifically:
 
 1. An [AWS eks/Google cloud gke/Local PC Kind] Kubernetes cluster built to SOC2 security standards
 
@@ -10,23 +11,20 @@ MongoDB (Database persistence layer) + Nodejs/express (API) + React (Frontend SP
 
 4. A MongoDB Atlas cluster to serve as the persistent database layer
 
-We have adopted a fairly simple application example here to show you how to containerize your MERN stack.
-
-And, perhaps most importantly, a couple of infrastructure-as-code Opta yaml files to do all the heavy-lifting with Opta's legendry HCL-free-Terraform magic. Lets get started!
 
 ## Pre-requisites
 
-Opta is a new kind of Infrastructure-As-Code framework where you work with high-level constructs instead of getting lost in low level cloud configuration or having to deal with [Terraform HCL](https://blog.runx.dev/my-pet-peeves-with-terraform-f9bb37d94950). For our MERN stack example Opta will setup all the production-grade infrastucture using a couple of short yaml files! You can install Opta on your PC by following the instructions [here](https://docs.opta.dev/installation/).
+Opta is a new kind of Infrastructure-As-Code framework where you work with high-level constructs instead of getting lost in low level cloud configuration or having to deal with [Terraform HCL](https://blog.runx.dev/my-pet-peeves-with-terraform-f9bb37d94950). You can install Opta on your PC by following the instructions [here](https://docs.opta.dev/installation/).
 
 Our MERN stack example is based on the application code created by The MongoDB Atlas team. Their [blog post](https://www.mongodb.com/languages/mern-stack-tutorial) will walk you through the Nodejs+Express backend, React frontend and MongoDB code. You should take a moment to read the blog post, although keep in mind that most of the manual/click-on-GUI steps mentioned in the post to setup the infrastructure are not applicable to this Opta Infrastructure-as-code MERN stack example.
 
-You can choose to deploy the MERN stack application on Kubernetes running in AWS (EKS cluster), GCP (GKE cluster) or Locally on your laptop (Kind cluster). AWS and GCP will incur cloud charges, but the local setup is completely free. We also use a MongoDB Atlas database, we will sign up for their service and use their free plan; you can always scale up the MongoDB deployment for your production code later.
+You can choose to deploy the MERN stack application on Kubernetes running in AWS (EKS cluster), GCP (GKE cluster) or Locally on your laptop (Kind cluster). AWS and GCP will incur cloud charges, but the local setup is completely free. We also use a MongoDB Atlas database, we will sign up for their service and use their a small database (could cost upto $3 per day); you can always scale up the MongoDB deployment for your production code later.
 
 
-
-1. Install Opta, as mentioned above using [these instructions](https://docs.opta.dev/installation/).
-2. Make a MongoDB Atlas account and obtain their [API credentials](https://docs.atlas.mongodb.com/tutorial/manage-programmatic-access?utm_source=runx_opta&utm_campaign=pla&utm_medium=referral); you will need these in your terminal environment to allow Opta to spin up a MongoDB cluster for your application.
-3. If you don't already have your cloud credentials (AWS or GCP), you can follow the Opta instructions for [AWS](https://docs.opta.dev/getting-started/aws/) or [GCP](https://docs.opta.dev/getting-started/gcp/). If you plan on deploying with Opta [locally](https://docs.opta.dev/getting-started/local/) on your PC, this step is not needed.
+1. Clone the [Opta Examples repo](https://github.com/run-x/opta-examples); the MERN stack example is located in the `opta-mern-stack` sub-directory of this repository.
+2. Install Opta, as mentioned above, using [these instructions](https://docs.opta.dev/installation/).
+3. Make a MongoDB Atlas account and obtain their [API credentials](https://docs.atlas.mongodb.com/tutorial/manage-programmatic-access?utm_source=runx_opta&utm_campaign=pla&utm_medium=referral); you will need these in your terminal environment to allow Opta to spin up a MongoDB cluster for your application.
+4. If you don't already have your cloud credentials (AWS or GCP), you can follow the Opta instructions for [AWS](https://docs.opta.dev/getting-started/aws/) or [GCP](https://docs.opta.dev/getting-started/gcp/). If you plan on deploying with Opta [locally](https://docs.opta.dev/getting-started/local/) on your PC, this step is not needed.
 
 So as an example, for AWS, you will inject the API keys into your terminal environment where opta will be invoked like so
 
@@ -41,9 +39,7 @@ export AWS_SECRET_ACCESS_KEY=FAKEksfja234sadfbjsdfgsdfg34SAD34fd
 
 ```
 
-
-
-## Lets Deploy
+## Deploy Application
 
 First, we create the Opta environment with the AWS (GCP) EKS (GKE) Kubernetes cluster. Sample AWS and GCP environment files are included in github repository..
 
@@ -70,8 +66,7 @@ opta deploy --local --image=mernapi:latest -c opta-examples/opta-mern-stack/serv
 opta deploy --local --image=mernfrontend:latest -c opta-examples/opta-mern-stack/client/opta-frontend-server.yaml  
 ```
 
-After about ~15 minutes you should see Opta should report that your changes have been deployed. Take a moment to think of what you just built and deployed - a production-grade Kubernetes cluster and MongoDB Atlas database in the cloud and a containerized MERN stack scalable application! 
-
+After about ~15 minutes you should see Opta should report that your changes have been deployed. 
 ## Test
 
 If you are running in either of the clouds, lets get the load-balancer endpoint:
@@ -84,15 +79,36 @@ opta output -c opta-examples/opta-mern-stack/server/opta-mern-server.yaml
 }
 ```
 
-You can now access the frontend in your browser at `http://<load_balancer_raw_dns>/mernfrontend`.
+You can now access the frontend in your browser at `http://<load_balancer_raw_dns>/mernfrontend`. As an aside, you can access the API backend at http://<load_balancer_raw_dns>/mernbackend/record.
 
 You should see the React single-page application page.
 
 
+![alt text](mern-insert-record.png "MERN Stack React SPA Insert Record")
+
+Click on the top left "MongoDB" image to see the list of records.
+
+![alt text](mern-record-list.png "MERN Stack React SPA Record List")
+
 As a side note, you can always configure DNS and TLS certificates using Opta for your your production application, as explained [here](https://docs.opta.dev/tutorials/ingress/).
 
+## Teardown
 
-# Credits
-The application frontend and backend is largely derived from the [MERN
-stack tutorial](https://www.mongodb.com/languages/mern-stack-tutorial) by the folks at Mongodb.com.
+First, destroy the application
+```
+# For AWS or GCP
+opta destroy -c opta-examples/opta-mern-stack/server/opta-mern-server.yaml 
+opta destroy -c opta-examples/opta-mern-stack/client/opta-frontend-server.yaml 
 
+# OR, For local
+opta destroy --local -c opta-examples/opta-mern-stack/server/opta-mern-server.yaml 
+opta deestroy --local-c opta-examples/opta-mern-stack/client/opta-frontend-server.yaml  
+```
+
+
+## Conclusion
+
+Take a moment to think of just how much you have built and deployed with a modest amount of effort: a production-grade Kubernetes cluster and MongoDB Atlas database in the cloud supporting a containerized MERN stack scalable application! From local laptop development to a production-grade public cloud Kubernetes deployment, Opta walks alongside you in your development and scaling journey. 
+
+
+__Credits: The application frontend and backend is largely derived from the [MERN stack tutorial](https://www.mongodb.com/languages/mern-stack-tutorial) by the folks at Mongodb.com. The MERN stack picture is from https://wikitia.com/wiki/File:MERN.jpg__
