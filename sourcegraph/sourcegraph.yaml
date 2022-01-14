@@ -6,7 +6,7 @@ providers:
     account_id: <<account_id::aws_account_id::Your AWS Account ID>>
 modules:
   - type: base
-  - type: k8s-clusteri
+  - type: k8s-cluster
     node_instance_type: t3.medium
     spot_instances: true
   - type: k8s-base
