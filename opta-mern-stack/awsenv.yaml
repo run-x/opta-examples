@@ -3,7 +3,7 @@ org_name: runx
 providers:
   aws:
     region: us-east-1
-    account_id: 652824372180
+    account_id: 652824312345
 modules:
   - type: base
   - type: k8s-cluster
