@@ -22,4 +22,4 @@ modules:
     type: mongodb-atlas
     mongodb_instance_size: M10
     region: US_EAST_1
-    mongodb_atlas_project_id: 6232e8eff8f4f80e0fxxxxxxx
+    mongodb_atlas_project_id: <<project_id::mongodb_project_id::Your MongoDB project ID>>
