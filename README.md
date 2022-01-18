@@ -9,5 +9,6 @@ This repository holds a compiled list of advanced, standalone, usages of Opta, m
 - [hello-app](/hello-app): Deploy a web application locally or on AWS, GCP, Azure
 - [mattermost](/mattermost-team): Deploy Mattermost (Team Edition) on AWS
 - [opta-mongodb-atlas-search](/opta-mongodb-atlas-search): Deploy a movie search application with Atlas Search
+- [opta-mern-stack](/opta-mern-stack): Containerize and Deploy the MongoDB + Express + ReactJS + Nodejs stack to AWS or Local; example application includes single-page-app React backend and Express/Nodejs backend.
 - [retool](/retool): Deploy Retool on AWS
 - [sourcegraph](/sourcegraph): Deploy Sourcegraph on AWS
