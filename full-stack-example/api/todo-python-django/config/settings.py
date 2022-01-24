@@ -151,5 +151,7 @@ REST_FRAMEWORK = {
 }
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = 'djangoapi/static/'
+STATIC_URL = '/djangoapi/static/'
 STATIC_ROOT =os.path.join(BASE_DIR, "staticfolder")
+FORCE_SCRIPT_NAME = os.environ.get("FORCE_SCRIPT_NAME","/djangoapi")
+

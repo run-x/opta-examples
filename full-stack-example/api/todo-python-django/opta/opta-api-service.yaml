@@ -10,6 +10,9 @@ modules:
       http: 8000
     image: AUTO
     healthcheck_path: "ht/"
+    env_vars:
+    - name: "FORCE_SCRIPT_NAME"
+      value: "/djangoapi"
     links:
       - database:
         - db_user: POSTGRES_USER
