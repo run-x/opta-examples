@@ -5,3 +5,7 @@ service in a single yaml, and to keep things simple that's what is being done in
 pointing to the lone yaml here as the "environment" (even though it deploys what can be considered a service as well),
 but we'd still advise you to break the current yaml to an environment and service manifest when you feel ready just
 to keep things clean.
+
+# Your examples are mostly for AWS-- what about other clouds?
+Opta is cloud-agnostic and fully supports GCP as well! Chances are it is missing due to brevity and our limited resources,
+but if you'd like us to show an example in GCP then please let us know in our [slack](https://slack.opta.dev).

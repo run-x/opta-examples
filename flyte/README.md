@@ -11,9 +11,10 @@ You can also use this button to fill in the variable fields in the config.
 It deploys a single container version of flyte on EKS in AWS. It uses AWS managed RDS instances and elasticcache. It also sets up various other resources like VPCs, subnets, load balancers etc.
 
 # Steps to deploy
-1. Fill in the required variables in the config file
-1. Put the `values-eks.yaml` file in the same location as the `flyte-aws.yaml` file
-1. Run `opta apply -c flyte-aws.yaml` on the config file
+* Fill in the required variables in the config file 
+* Put the `values-eks.yaml` file in the same location as the `flyte-aws.yaml` file
+* Run `opta apply -c flyte-aws.yaml` on the config file
+* You will be prompted to approve changes a couple of times as opta will go through various stages. This is expected, just keep approving.
 
 That's it. Flyte is deployed on AWS. You can find the AWS load balancer URL to access the deployment by running `opta output`
 

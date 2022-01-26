@@ -132,3 +132,5 @@ Visit [Opta Documentation](https://docs.opta.dev/)  to learn more.
 # Credits
 
 This example is derived from the [Kubernetes Automation Toolkit](https://github.com/BigBitBusInc/kubernetes-automation-toolkit), an open-source learning resource by [BigBitBus Inc](https://www.bigbitbus.com/). 
+
+For more guidance, please reach out to us in our [slack channel](https://slack.opta.dev).
