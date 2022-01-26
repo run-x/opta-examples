@@ -1,37 +1,17 @@
-# Hello Application example
+# httpbin example
 
-This example shows how to build and deploy a containerized python web server
-application using [Opta](https://github.com/run-x/opta).
+This example shows how to deploy an [httpbin](https://httpbin.org/)
+service using [Opta](https://github.com/run-x/opta).
 
 
 This directory contains:
 
     .
-    ├── app.py            # HTTP server implementation. It responds to all HTTP requests with a  "Hello, World!" response.
-    ├── Dockerfile        # build the Docker image for the application
     ├── env-aws.yaml      # opta environment file for AWS
     ├── env-azure.yaml    # opta environment file for Azure
     ├── env-gcp.yaml      # opta environment file for GCP
     ├── env-local.yaml    # opta environment file for local
-    └── hello.yaml        # opta service file
-
-## Build and run locally
-
-
-1. Build the image
-    ```bash
-    docker build . -t hello-app:v1
-    ```
-1. Run the hello app
-    ```bash
-    docker run -p 80:80 hello-app:v1
-    # or use a different port
-    docker run -p 8080:8080 -e PORT=8080 hello-app:v1
-    ```
-1. Test
-    ```bash
-    curl http://localhost:80/hello
-    ```
+    └── httpbin.yaml      # opta service file
 
 ## Deploy to local Kubernetes using Opta
 
@@ -39,19 +19,21 @@ This directory contains:
     ```bash
     opta apply --local --auto-approve -c env-local.yaml
     ```
-1. Deploy the service
+1. Apply the service
     ```bash
-    opta deploy --image hello-app:v1 --config hello.yaml --auto-approve --env local
+    opta apply --config httpbin.yaml --auto-approve --env local
     ```
 1. Test
     ```bash
-    curl http://localhost:8080/hello
+    curl http://localhost:8080/
     ```
 1. Clean up
     ```bash
     opta destroy --auto-approve --local --config hello.yaml
     opta destroy --auto-approve --local --config env-local.yaml
     ```
+   
+**NOTE**: We are using `opta apply` as `opta deploy` is only needed when the image is set to AUTO
 
 ## Deploy to a cloud provider using Opta
 
@@ -71,18 +53,18 @@ This directory contains:
     ```
 3. Deploy the service: push the image and deploy it to Kubernetes
     ```bash
-    opta deploy --image hello-app:v1 --config hello.yaml --auto-approve --env $ENV
+    opta apply --config httpbin.yaml --auto-approve --env $ENV
     ```
 4. Test
     ```bash
-    curl http://${load_balancer}/hello
+    curl http://${load_balancer}
 
     # you can run any kubectl command at this point
-    kubectl -n hello get all
+    kubectl -n httpbin get all
     ```
 5. Clean up
     ```bash
-    opta destroy --auto-approve --config hello.yaml --env $ENV
+    opta destroy --auto-approve --config httpbin.yaml --env $ENV
     opta destroy --auto-approve --config env-${ENV}.yaml
     ```
 

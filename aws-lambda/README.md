@@ -49,3 +49,5 @@ You can also visit the `lambda_trigger_uri` in your browser to check your rest a
 # References
 * Checkout [AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html) on how to package more complex lambdas
 * [Opta docs](https://docs.opta.dev)
+
+For more guidance, please reach out to us in our [slack channel](https://slack.opta.dev).

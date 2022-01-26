@@ -13,6 +13,7 @@ It deploys a single container version of sourcegraph on EKS in AWS. It uses AWS 
 # Steps to deploy
 * Fill in the required variables in the config file
 * Run `opta apply -c sourcegraph.yaml` on the config file
+* You will be prompted to approve changes a couple of times as opta will go through various stages. This is expected, just keep approving.
 
 That's it. Sourcegraph is deployed on AWS. You can find the AWS load balancer URL to access the deployment by running `opta output`
 
@@ -35,3 +36,5 @@ name_servers = tolist([
 Your domain should now be pointing to the sourcegraph deployment with secure TLS
 
 # [FAQ](../FAQ.md)
+
+For more guidance, please reach out to us in our [slack channel](https://slack.opta.dev).

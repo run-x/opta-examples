@@ -55,4 +55,4 @@ Before you can use the application, follow [steps 1 and 2](https://www.mongodb.c
 
 Once you are done, point your browser to the ELB load balancer (or http://localhost:8080/ in case you are using Opta Local) and search the movie database!
 
-
+For more guidance, please reach out to us in our [slack channel](https://slack.opta.dev).

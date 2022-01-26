@@ -12,6 +12,7 @@ It deploys a single container version of Mattermost (Team Edition) on EKS in AWS
 # Steps to deploy
 * Fill in the required variables in the config file, mattermost-aws.yaml.
 * Run `opta apply -c mattermost-aws.yaml` on the config file
+* You will be prompted to approve changes a couple of times as opta will go through various stages. This is expected, just keep approving.
 
 That's it. Mattermost is deployed on AWS. You can find the AWS load balancer URL to access the deployment by running `opta output` (looks for the field called `load_balancer_raw_dns`).
 
@@ -38,3 +39,5 @@ Your domain should now be pointing to the Mattermost deployment with secure TLS
 ![Alt text](end_result.png?raw=true "What it should look like")
 
 # [FAQ](../FAQ.md)
+
+For more guidance, please reach out to us in our [slack channel](https://slack.opta.dev).
