@@ -7,7 +7,7 @@ modules:
     type: helm-chart
     chart: kube-prometheus-stack
     repository: 'https://prometheus-community.github.io/helm-charts'
-    chart_version: '19.0.2'
+    chart_version: '32.2.0'
     namespace: monitoring
     create_namespace: True
-    values_file: "prometheus-grafana-monitoring-stack-values.yaml"
+    values_file: "newvalues.yaml"
